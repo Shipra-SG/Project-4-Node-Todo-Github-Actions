@@ -30,6 +30,6 @@ push_job:
 deploy_job:
   stage: deploy
   script:
-    - docker-compose up -d
+    - docker compose up -d
   tags:
     - dev
