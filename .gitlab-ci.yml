@@ -1,14 +1,22 @@
+image: docker:latest
+
+services:
+  - name: docker:dind
+    command: ["--tls=false"]
+
 stages:
   - build
   - push
   - deploy
 
 variables:
+  DOCKER_TLS_CERTDIR: ""
   IMAGE_NAME: "$DOCKER_USERNAME/node-todo-cicd"
 
 build:
   stage: build
   script:
+    - docker --version
     - docker build -t $IMAGE_NAME:latest .
   only:
     - main
@@ -16,16 +24,20 @@ build:
 push:
   stage: push
   script:
-    - echo "DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker push $IMAGE_NAME:latest
   only:
     - main
 
 deploy:
   stage: deploy
+  before_script:
+    - apk add --no-cache openssh
+    - mkdir -p ~/.ssh
+    - echo "$EC2_KEY" > ~/.ssh/ec2.pem
+    - chmod 600 ~/.ssh/ec2.pem
   script:
-    - chmod 600 $EC2_KEY
-    - ssh -o StrictHostKeyChecking=no -i $EC2_KEY ubuntu@$EC2_HOST "
+    - ssh -o StrictHostKeyChecking=no -i ~/.ssh/ec2.pem ubuntu@$EC2_HOST "
         docker pull $IMAGE_NAME:latest &&
         docker stop node-app || true &&
         docker rm node-app || true &&
@@ -33,3 +45,4 @@ deploy:
       "
   only:
     - main
+
