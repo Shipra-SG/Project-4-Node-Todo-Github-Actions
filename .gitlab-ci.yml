@@ -5,25 +5,18 @@ services:
     command: ["--tls=false"]
 
 stages:
-  - build
-  - push
+  - build_push
   - deploy
 
 variables:
   DOCKER_TLS_CERTDIR: ""
   IMAGE_NAME: "$DOCKER_USERNAME/node-todo-cicd"
 
-build:
-  stage: build
+build_and_push:
+  stage: build_push
   script:
     - docker --version
     - docker build -t $IMAGE_NAME:latest .
-  only:
-    - main
-
-push:
-  stage: push
-  script:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker push $IMAGE_NAME:latest
   only:
