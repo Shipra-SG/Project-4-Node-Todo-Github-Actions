@@ -91,11 +91,11 @@ npm test
 A Dockerfile was created to containerize the Node.js application.
 
 Key actions performed:
-> Used Node base image
-> Copied application files
-> Installed dependencies
-> Ran tests inside Docker image
-> Exposed application port
+- Used Node base image
+- Copied application files
+- Installed dependencies
+- Ran tests inside Docker image
+- Exposed application port
 
 This ensured consistency across environments.
 
@@ -153,10 +153,10 @@ Pipeline automatically triggers on every push to the main branch.
 ## STEP 9: Automatic Deployment to EC2
 The deploy stage performs the following actions:
 
-> Pulls the latest Docker image from Docker Hub
-> Stops old container (if running)
-> Starts a new container with updated image
-> Deployment happens automatically via SSH.
+- Pulls the latest Docker image from Docker Hub
+- Stops old container (if running)
+- Starts a new container with updated image
+- Deployment happens automatically via SSH.
 
 ---
 
@@ -170,19 +170,19 @@ http://<EC2_PUBLIC_IP>:8000
 
 ## Security Best Practices Followed
 
-> CI/CD secrets stored as masked variables
-> No credentials pushed to GitHub
-> .gitignore used to exclude sensitive files
-> SSH key permissions restricted
+- CI/CD secrets stored as masked variables
+- No credentials pushed to GitHub
+- .gitignore used to exclude sensitive files
+- SSH key permissions restricted
 
 ---
 
 ## Key Learnings
-End-to-end CI/CD automation
-Docker image lifecycle management
-Secure deployment using SSH
-Real-world GitLab CI/CD usage
-Cloud deployment on AWS EC2
+- End-to-end CI/CD automation
+- Docker image lifecycle management
+- Secure deployment using SSH
+- Real-world GitLab CI/CD usage
+- Cloud deployment on AWS EC2
 
 ---
 
@@ -194,7 +194,7 @@ Aspiring DevOps / Cloud Engineer
 
 # Future Enhancements
 
-Add GitHub Actions pipeline
-Deploy using Kubernetes
-Add monitoring with Prometheus & Grafana
-Enable HTTPS with Nginx & SSL
+- Add GitHub Actions pipeline
+- Deploy using Kubernetes
+- Add monitoring with Prometheus & Grafana
+- Enable HTTPS with Nginx & SSL
