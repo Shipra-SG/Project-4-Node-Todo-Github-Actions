@@ -186,15 +186,16 @@ http://<EC2_PUBLIC_IP>:8000
 
 ---
 
-👩‍💻 Author
-Shipra
-Aspiring DevOps / Cloud Engineer
-
----
-
 # Future Enhancements
 
 - Add GitHub Actions pipeline
 - Deploy using Kubernetes
 - Add monitoring with Prometheus & Grafana
 - Enable HTTPS with Nginx & SSL
+
+---
+
+👩‍💻 Author | Shipra
+- Aspiring DevOps / Cloud Engineer
+
+---
